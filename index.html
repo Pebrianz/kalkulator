@@ -9,13 +9,13 @@
       body {
         padding: 0;
         margin: 0;
+        background-color: hsl(0, 0%, 10%);
       }
       .container {
         display: grid;
-        grid-template-columns: repeat(4, 80px);
-        grid-template-rows: repeat(7, 80px);
+        grid-template-columns: repeat(4, 4rem);
+        grid-template-rows: repeat(7, 4rem);
         gap: 10px;
-        padding-bottom: 40px;
         background-color: hsl(0, 0%, 10%);
         align-content: end;
         justify-content: space-evenly;
@@ -39,7 +39,7 @@
         grid-column: 1 / 5;
         color: hsl(0, 0%, 90%);
         text-align: right;
-        padding-right: 2rem;
+        padding: 0 2rem;
         height: 80%;
         align-self: center;
         background-color: hsl(0, 0%, 10%);
@@ -91,8 +91,8 @@
     </div>
 
     <script charset="utf-8">
-     const height = `${window.innerHeight - 40}px`
-     document.querySelector(".container").style.height = `${height}`
+      const height = `${window.innerHeight - 40}px`;
+      document.querySelector(".container").style.height = `${height}`;
 
       math.config({
         number: "BigNumber", // Default type of number:
