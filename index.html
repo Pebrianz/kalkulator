@@ -10,15 +10,20 @@
         padding: 0;
         margin: 0;
         background-color: hsl(0, 0%, 10%);
+        height: 100vh;
+        width: 100vw;
       }
       .container {
         display: grid;
         grid-template-columns: repeat(4, 4rem);
         grid-template-rows: repeat(7, 4rem);
-        gap: 10px;
+        gap: 0.5rem;
         background-color: hsl(0, 0%, 10%);
-        align-content: end;
+        align-content: center;
         justify-content: space-evenly;
+        height: 100%;
+        max-width: 21rem;
+        margin: auto;
       }
 
       button {
@@ -40,7 +45,7 @@
         color: hsl(0, 0%, 90%);
         text-align: right;
         padding: 0 2rem;
-        height: 80%;
+        height: 8rem;
         align-self: center;
         background-color: hsl(0, 0%, 10%);
         border-radius: 5px;
@@ -91,28 +96,25 @@
     </div>
 
     <script charset="utf-8">
-      const height = `${window.innerHeight - 40}px`;
-      document.querySelector(".container").style.height = `${height}`;
-
       math.config({
-        number: "BigNumber", // Default type of number:
+        number: 'BigNumber', // Default type of number:
         // 'number' (default), 'BigNumber', or 'Fraction'
         precision: 16, // Number of significant digits for BigNumbers
       });
 
-      const display = document.querySelector(".display");
-      const numbers = document.querySelectorAll(".number");
-      const operations = document.querySelectorAll(".operation");
-      const hasil = document.querySelector(".hasil");
-      const hapus = document.querySelector(".hapus");
-      const clear = document.querySelector(".clear");
-      const comma = document.querySelector(".comma");
-      const persen = document.querySelector(".persen");
+      const display = document.querySelector('.display');
+      const numbers = document.querySelectorAll('.number');
+      const operations = document.querySelectorAll('.operation');
+      const hasil = document.querySelector('.hasil');
+      const hapus = document.querySelector('.hapus');
+      const clear = document.querySelector('.clear');
+      const comma = document.querySelector('.comma');
+      const persen = document.querySelector('.persen');
 
       for (const number of numbers) {
-        number.addEventListener("click", (e) => {
+        number.addEventListener('click', (e) => {
           let text = display.textContent;
-          let arr = text.split(" ");
+          let arr = text.split(' ');
           let lastArr = arr[arr.length - 1];
           if (lastArr.length <= 16) {
             if (text != 0 && !/\n/g.test(text)) {
@@ -125,7 +127,7 @@
       }
 
       for (const operation of operations) {
-        operation.addEventListener("click", (e) => {
+        operation.addEventListener('click', (e) => {
           let opr = e.target.textContent;
           let text = display.textContent;
           if (/\d$/.test(text)) {
@@ -142,41 +144,41 @@
         });
       }
 
-      comma.addEventListener("click", () => {
+      comma.addEventListener('click', () => {
         let text = display.textContent;
-        let arr = text.split(" ");
+        let arr = text.split(' ');
         let lastArr = arr[arr.length - 1];
-        if (/\d$/.test(text) && !lastArr.includes(",")) {
+        if (/\d$/.test(text) && !lastArr.includes(',')) {
           if (/\n/g.test(text)) {
             display.innerHTML = `${lastArr},`;
           } else {
-            display.innerHTML += ",";
+            display.innerHTML += ',';
           }
         }
       });
 
-      persen.addEventListener("click", () => {
+      persen.addEventListener('click', () => {
         let text = display.textContent;
-        let arr = text.split(" ");
-        let lastArr = arr[arr.length - 1].replace(",", ".");
+        let arr = text.split(' ');
+        let lastArr = arr[arr.length - 1].replace(',', '.');
         if (/\d$/.test(lastArr)) {
           if (/\n/g.test(text)) {
             arr = math
-              .evaluate(lastArr + " / 100")
+              .evaluate(lastArr + ' / 100')
               .toString()
-              .replace(".", ",");
+              .replace('.', ',');
             display.innerHTML = arr;
           } else {
             arr[arr.length - 1] = math
-              .evaluate(lastArr + " / 100")
+              .evaluate(lastArr + ' / 100')
               .toString()
-              .replace(".", ",");
-            display.innerHTML = arr.join(" ");
+              .replace('.', ',');
+            display.innerHTML = arr.join(' ');
           }
         }
       });
 
-      hapus.addEventListener("click", () => {
+      hapus.addEventListener('click', () => {
         let text = display.textContent;
         let lastIndex = text.length - 1;
         if (!/\n/g.test(text)) {
@@ -190,17 +192,17 @@
         }
       });
 
-      hasil.addEventListener("click", () => {
+      hasil.addEventListener('click', () => {
         if (!/\n/g.test(display.textContent)) {
           if (!/\s$/.test(display.textContent)) {
             let displayContent = display.textContent
-              .replace(/×/g, "*")
-              .replace(/÷/g, "/")
-              .replace(/,/g, ".");
+              .replace(/×/g, '*')
+              .replace(/÷/g, '/')
+              .replace(/,/g, '.');
             let result = math
               .evaluate(displayContent)
               .toString()
-              .replace(/[.]/, ",");
+              .replace(/[.]/, ',');
             display.innerHTML = `
                 <span class="history">${display.textContent}</span></br>
                 <span class="result">${result}</span>`;
@@ -208,8 +210,8 @@
         }
       });
 
-      clear.addEventListener("click", () => {
-        display.innerHTML = "0";
+      clear.addEventListener('click', () => {
+        display.innerHTML = '0';
       });
     </script>
   </body>
